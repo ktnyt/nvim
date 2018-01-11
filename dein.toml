@@ -6,6 +6,9 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
+repo = 'kentarosasaki/vim-emacs-bindings'
+
+[[plugins]]
 repo = 'arcticicestudio/nord-vim'
 
 [[plugins]]

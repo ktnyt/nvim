@@ -35,6 +35,9 @@ set encoding=utf8
 
 set completeopt=menuone
 
+"" Tab Emulation
+set hidden
+
 let g:deoplete#enable_at_startup = 1
 
 "" Keymaps
@@ -42,19 +45,22 @@ let g:deoplete#enable_at_startup = 1
 "nnoremap ; :
 "nnoremap : ;
 
-noremap j gj
-noremap k gk
+nnoremap <silent>gh <C-w>h
+nnoremap <silent>gj <C-w>j
+nnoremap <silent>gk <C-w>k
+nnoremap <silent>gl <C-w>l
 
-nnoremap <SPACE> <Nop>
-nnoremap <silent><SPACE>p :bp<CR>
-nnoremap <silent><SPACE>n :bn<CR>
-nnoremap <silent><SPACE>d :bd<CR>
-nnoremap <silent><SPACE>w :bp\|bd #<CR>
+nnoremap <silent>gH <C-w>H
+nnoremap <silent>gJ <C-w>J
+nnoremap <silent>gK <C-w>K
+nnoremap <silent>gL <C-w>L
 
-nmap <S-h> ^
-nmap <S-j> G
-nmap <S-k> gg
-nmap <S-l> $
+nnoremap <silent>gp :bp<CR>
+nnoremap <silent>gn :bn<CR>
+nnoremap <silent>gd :bd<CR>
+nnoremap <silent>gw :bp\|bd #<CR>
+
+nnoremap <silent>ge :NERDTreeFocus<CR>
 
 nnoremap <C-l> zz
 
@@ -82,6 +88,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'nord'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 "" ale
 let g:ale_sign_error = '⨉'
