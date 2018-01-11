@@ -33,6 +33,8 @@ set number
 
 set encoding=utf8
 
+set completeopt=menuone
+
 let g:deoplete#enable_at_startup = 1
 
 "" Keymaps
@@ -43,11 +45,11 @@ let g:deoplete#enable_at_startup = 1
 noremap j gj
 noremap k gk
 
-nnoremap b <Nop>
-nnoremap <silent>bp :bp<CR>
-nnoremap <silent>bn :bn<CR>
-nnoremap <silent>bd :bd<CR>
-nnoremap <silent>bw :bp\|bd #<CR>
+nnoremap <SPACE> <Nop>
+nnoremap <silent><SPACE>p :bp<CR>
+nnoremap <silent><SPACE>n :bn<CR>
+nnoremap <silent><SPACE>d :bd<CR>
+nnoremap <silent><SPACE>w :bp\|bd #<CR>
 
 nmap <S-h> ^
 nmap <S-j> G
@@ -113,3 +115,9 @@ let g:go_highlight_types = 1
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 let g:airline#extensions#ale#enabled= 1
+
+" PlantUML
+au FileType pu set noexpandtab
+au FileType pu set shiftwidth=2
+au FileType pu set softtabstop=2
+au FileType pu set tabstop=2
