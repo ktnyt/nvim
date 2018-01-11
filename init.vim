@@ -102,13 +102,15 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_change = 'never'
 
-let g:ale_linters = { 'go': ['gofmt'] }
+let g:ale_linters = { 'go': ['golint'] }
 
 " Go
 au FileType go set noexpandtab
 au FileType go set shiftwidth=2
 au FileType go set softtabstop=2
 au FileType go set tabstop=2
+
+autocmd InsertLeave *.go call go#fmt#Format(-1)
 
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
