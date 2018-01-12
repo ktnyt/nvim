@@ -57,8 +57,8 @@ nnoremap <silent>gL <C-w>L
 
 nnoremap <silent>gp :bp<CR>
 nnoremap <silent>gn :bn<CR>
-nnoremap <silent>gd :bd<CR>
-nnoremap <silent>gw :bp\|bd #<CR>
+nnoremap <silent>gw :Bdelete<CR>
+nnoremap <silent>gq :bufdo :Bdelete<CR>
 
 nnoremap <silent>ge :NERDTreeFocus<CR>
 
@@ -102,7 +102,16 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_change = 'never'
 
-let g:ale_linters = { 'go': ['golint', 'go build', 'go test'] }
+let g:ale_linters = {
+\ 'go': [
+\   'golint',
+\   'go build',
+\   'go test',
+\   'go vet',
+\   'gocyclo -over 15 .',
+\   'ineffassign .',
+\   ]
+\ }
 
 " Go
 au FileType go set noexpandtab

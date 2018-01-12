@@ -9,6 +9,10 @@ repo = 'Shougo/deoplete.nvim'
 repo = 'kentarosasaki/vim-emacs-bindings'
 
 [[plugins]]
+repo = 'moll/vim-bbye'
+build = 'make'
+
+[[plugins]]
 repo = 'arcticicestudio/nord-vim'
 
 [[plugins]]
