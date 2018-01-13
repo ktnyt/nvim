@@ -3,9 +3,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-
-[[plugins]]
 repo = 'kentarosasaki/vim-emacs-bindings'
 
 [[plugins]]
@@ -28,39 +25,4 @@ repo = 'vim-airline/vim-airline'
 repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
-repo = 'w0rp/ale'
-
-[[plugins]]
-repo = 'SirVer/ultisnips'
-
-[[plugins]]
-repo = 'tpope/vim-abolish'
-
-[[plugins]]
 repo = 'jiangmiao/auto-pairs'
-
-# Golang
-[[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
-
-[[plugins]]
-repo = 'zchee/deoplete-go'
-build = 'make'
-on_ft = 'go'
-hook_source = '''
-    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
-'''
-
-# Protobuf
-[[plugins]]
-repo = 'uarun/vim-protobuf'
-
-# C++
-[[plugins]]
-repo = 'octol/vim-cpp-enhanced-highlight'
-
-# Plantuml
-[[plugins]]
-repo = 'aklt/plantuml-syntax'
-on_ft = ['pu', 'uml', 'plantuml']

@@ -14,10 +14,13 @@ endif
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
 let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
+let s:lazy_file = fnamemodify(expand('<sfile>'), ':h').'/lazy.toml'
+
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#load_toml(s:toml_file)
+  call dein#load_toml(s:toml_file, {'lazy': 0})
+  call dein#load_toml(s:lazy_file, {'lazy': 1})
 
   call dein#end()
   call dein#save_state()
@@ -36,14 +39,14 @@ set encoding=utf8
 set completeopt=menuone
 
 "" Tab Emulation
-set hidden
-
 let g:deoplete#enable_at_startup = 1
 
 "" Keymaps
 " For use with ErgoDox EZ
 "nnoremap ; :
 "nnoremap : ;
+
+inoremap <silent>jk <ESC>
 
 nnoremap <silent>gh <C-w>h
 nnoremap <silent>gj <C-w>j
@@ -60,6 +63,9 @@ nnoremap <silent>gn :bn<CR>
 nnoremap <silent>gw :Bdelete<CR>
 nnoremap <silent>gq :bufdo :Bdelete<CR>
 
+nnoremap <silent>g[ :tabp<CR>
+nnoremap <silent>g] :tabn<CR>
+
 nnoremap <silent>ge :NERDTreeFocus<CR>
 
 nnoremap <C-l> zz
@@ -67,21 +73,24 @@ nnoremap <C-l> zz
 "" colors
 colorscheme nord
 
-if (has("nvim"))
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 endif
 
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 "" nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "" airline
@@ -105,13 +114,15 @@ let g:ale_lint_on_text_change = 'never'
 let g:ale_linters = {
 \ 'go': [
 \   'golint',
+\   'go vet',
 \   'go build',
 \   'go test',
-\   'go vet',
 \   'gocyclo -over 15 .',
 \   'ineffassign .',
 \   ]
 \ }
+
+let g:airline#extensions#ale#enabled= 1
 
 " Go
 au FileType go set noexpandtab
@@ -130,10 +141,15 @@ let g:go_highlight_types = 1
 
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
-let g:airline#extensions#ale#enabled= 1
 
 " PlantUML
 au FileType pu set noexpandtab
 au FileType pu set shiftwidth=2
 au FileType pu set softtabstop=2
 au FileType pu set tabstop=2
+
+" Python
+au FileType python set noexpandtab
+au FileType python set shiftwidth=4
+au FileType python set softtabstop=4
+au FileType python set tabstop=4
