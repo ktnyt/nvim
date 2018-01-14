@@ -111,16 +111,8 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_change = 'never'
 
-let g:ale_linters = {
-\ 'go': [
-\   'golint',
-\   'go vet',
-\   'go build',
-\   'go test',
-\   'gocyclo -over 15 .',
-\   'ineffassign .',
-\   ]
-\ }
+let g:ale_linters = { 'go': ['gometalinter'] }
+let g:ale_go_gometalinter_options = '--fast --disable gotype'
 
 let g:airline#extensions#ale#enabled= 1
 
@@ -142,14 +134,21 @@ let g:go_highlight_types = 1
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 
+" React
+let g:jsx_ext_required = 0
+au FileType javascript set expandtab
+au FileType javascript set shiftwidth=2
+au FileType javascript set softtabstop=2
+au FileType javascript set tabstop=2
+
 " PlantUML
-au FileType pu set noexpandtab
+au FileType pu set expandtab
 au FileType pu set shiftwidth=2
 au FileType pu set softtabstop=2
 au FileType pu set tabstop=2
 
 " Python
-au FileType python set noexpandtab
+au FileType python set expandtab
 au FileType python set shiftwidth=4
 au FileType python set softtabstop=4
 au FileType python set tabstop=4
